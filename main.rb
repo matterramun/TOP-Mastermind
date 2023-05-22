@@ -51,17 +51,25 @@ class Mastermind
     guess_array = guess_temp.digits.reverse
     code_array = @code.digits.reverse
     guess_result = []
-    code_array.each_with_index do |code_digit, code_digit_index| # Iterates through each digit to eval match, mismatch, or miss
+    # Iterates through each digit to eval match, mismatch, or miss
+    code_array.each_with_index do |code_digit, code_digit_index| 
       guess_array.each_with_index do |digit, digit_index|
-        puts "Code: #{code_digit} Guess: #{digit}"
+        #puts "Code: #{code_digit} Guess: #{digit}. Index code: #{code_digit_index} Index guess: #{digit_index}" # Console Logging
         if digit == code_digit && digit_index == code_digit_index
           guess_result << digit
-        elsif digit == code_digit
+          break
+        elsif digit == code_digit && digit_index != code_digit_index 
+          # ensure matching index doesnt have a match before declaring mismatch
+          if guess_array[digit_index] == code_array[digit_index] 
+            guess_result << digit
+            break
+          end
           guess_result << '?'
+          break
         end
       end
       guess_result << 'x' if guess_result.length == code_digit_index
-      puts "Guess iteration: #{guess_result}"
+      #puts "Guess iteration: #{guess_result}" # Console Logging
     end
     @board << guess_result.join
   end

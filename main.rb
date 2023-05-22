@@ -33,8 +33,20 @@ class Mastermind
   end
 
   def guessattempt
-    puts 'What is your guess?'
-    guess_temp = gets.chomp.to_i
+    guess_temp = nil
+    loop do
+      puts 'Please enter a guess'
+      guess_temp = gets.chomp.to_i
+      if guess_temp.nil?
+        puts 'Guess must be 4 digits'
+      elsif guess_temp < 1000
+        puts 'Guess must be 4 digits, between 1000 and 9999'
+      elsif guess_temp > 9999
+        puts 'Guess must be 4 digits, between 1000 and 9999'
+      else
+        break
+      end
+    end
     @guess << guess_temp
     guess_array = guess_temp.digits.reverse
     code_array = @code.digits.reverse

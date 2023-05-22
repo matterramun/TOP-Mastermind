@@ -9,7 +9,7 @@ class Mastermind
     @guess = []
     @code = nil
     play
-    #showboard
+    # showboard
   end
 
   def play
@@ -36,23 +36,22 @@ class Mastermind
     puts 'What is your guess?'
     guess_temp = gets.chomp.to_i
     @guess << guess_temp
-    guess_array = guess_temp.digits
-    code_array = @code.digits
+    guess_array = guess_temp.digits.reverse
+    code_array = @code.digits.reverse
     guess_result = []
-    code_array.each_with_index do |digit, digit_index| # Iterates through each digit to eval match, mismatch, or miss
-      guess_array.each_with_index do |code_digit, code_digit_index|
+    code_array.each_with_index do |code_digit, code_digit_index| # Iterates through each digit to eval match, mismatch, or miss
+      guess_array.each_with_index do |digit, digit_index|
+        puts "Code: #{code_digit} Guess: #{digit}"
         if digit == code_digit && digit_index == code_digit_index
           guess_result << digit
-          next
         elsif digit == code_digit
           guess_result << '?'
-          next
         end
-        guess_result << 'x' if guess_result.length() == digit_index 
-        puts "Guess iteration: #{guess_result}"
       end
+      guess_result << 'x' if guess_result.length == code_digit_index
+      puts "Guess iteration: #{guess_result}"
     end
-    @board << guess_result.join() #This doesnt work...
+    @board << guess_result.join
   end
 end
 

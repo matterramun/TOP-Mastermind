@@ -58,14 +58,21 @@ class Mastermind
         puts "Code: #{code_digit} Guess: #{digit}. Index code: #{code_digit_index} Index guess: #{digit_index}" # Console Logging
         if digit == code_digit && digit_index == code_digit_index
           guess_result << digit
-          next
+          break
         elsif digit == code_digit && digit_index != code_digit_index
-          # ensure matching index doesnt have a match before declaring mismatch
-          if guess_array[digit_index] == code_array[digit_index]
+          if guess_array[digit_index] == code_array[digit_index] # ensure matching index doesnt have a match before declaring mismatch
            guess_result << digit
            break
+          elsif guess_array[code_digit_index] == digit && code_digit_index > digit_index # there is a true match with the same digit on a higher index, return x
+            guess_result << 'x'
+            puts "Future true match"
+          elsif guess_array.select{|e| e == digit}.length >= code_array.select{|e| e == digit}.length && 
+              code_array.select{|e| e == digit} == guess_array.select.with_index{|e,i| e == digit && (guess_result[i] == '?' || guess_result[i] == digit)} #There is already a mismatch for this digit and the number of instances of this digit is met
+            guess_result << 'x'
+            puts "Reducing number of mismatches to equal to results in the code"
+          else 
+            guess_result << '?'
           end
-          guess_result << '?'
           break
         end
       end

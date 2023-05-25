@@ -14,5 +14,5 @@ inform Codebreaker when each digit exists and matches position
 
 Bugs:
 ✅ 0001 - Guess with multiple matches generates extra entries in guess array. Each guess digit must only result in a single 
-✅ 0002 - ex code 2462: 2462|246?. Guess digit matching earlier in the string will generate a ? regardless of result in current spot.
+0002 - ex code 2462: 2462|246?. Guess digit matching earlier in the string will generate a ? regardless of result in current spot.
 0003 - ex code 1399: 1123|1?xx. If only one matching digit, dont mismatch if the single match has already been matched.

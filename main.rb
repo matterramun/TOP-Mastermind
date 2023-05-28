@@ -8,12 +8,40 @@ class Mastermind
     @board = []
     @guess = []
     @code = nil
+    which_player
     play
+  end
+
+  def which_player
+    loop do
+      puts 'Who is the Player? 1 for You, 2 for the PC'
+      @player = gets.chomp.to_i
+      if @player != 1 || @player != 2 
+        break
+      end
+    end
+    
   end
 
   def play
     # puts 'Generating code...'
-    @code = rand(1000..9999)
+    if @player == 1
+      @code = rand(1000..9999)
+    else
+      loop do
+        puts 'Submit a code between 1000 and 9999'
+        @code = gets.chomp.to_i
+        if @code.nil?
+          puts 'Code must be 4 digits'
+        elsif @code < 1000
+          puts 'Code must be 4 digits, between 1000 and 9999'
+        elsif @code > 9999
+          puts 'Code must be 4 digits, between 1000 and 9999'
+        else
+          break
+        end
+      end
+    end
     # puts @code
     (i = 12).times do
       if i.positive?

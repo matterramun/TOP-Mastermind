@@ -16,7 +16,6 @@ class Mastermind
     loop do
       puts 'Who is the Player? 1 for You, 2 for the PC'
       @player = gets.chomp.to_i
-      puts @player
       if @player.nil?
         puts "Pick 1 or 2"
       elsif @player < 1
@@ -136,8 +135,8 @@ class Mastermind
   end
 
   def pc_guesser
-    puts "match_array: #{@match_array}"
-    puts "imperfect_array: #{@imperfect_array}"
+    # puts "match_array: #{@match_array}"
+    # puts "imperfect_array: #{@imperfect_array}"
     case @board.length
     when 0
       1122
@@ -145,31 +144,19 @@ class Mastermind
       3456
     when 2
       7890
-    when 3..13
+    when 4..13
       # placeholder until the guessing logic is implemented
       rand(1000..9999)
-    else
-      imperfect_array_index = []
-      @board.each_with_index do |guess, _guess_index|
-        match_array << guess.scan(/[0-9]/)
-
-        # Get any mismatches, digit from @board at guess_index that match ? in @guess
-        guess_array = guess.chars
-        imperfect_array_index << guess_array.each_index.select { |i| guess_array[i] == '?' }.join.to_i
-        # Match to @board entry digit and flatten
-        puts "imperfect_array_index: #{imperfect_array_index}"
-        imperfect_array_index.each_with_index do |board_index, digit_index|
-          guess_chars = @guess[digit_index].digits.reverse
-          puts "guess_chars: #{guess_chars}"
-          # guess_chars = guess_chars.chars
-          imperfect_array << guess_chars[board_index]
-        end
-        puts "imperfect_array: #{imperfect_array}"
-      end
+    when 3
+      guess_array = []
+      puts pc_utils(3,guess_array)
+      puts "Guess array... #{guess_array}"
+      # pc_utils(4)
+      guess_array.join
     end
   end
 
-  def pc_utils(tool, input)
+  def pc_utils(tool, input="")
     puts "pc_utils: tool #{tool} input #{input}"
     case tool
     when 0
@@ -179,6 +166,15 @@ class Mastermind
       @match_array << input
     when 2 # Mismatch submission
       @imperfect_array << input
+    when 3 # Perfect match push into guess array
+      @match_array.each do |match_array|
+        location = match_array[1]
+        puts "location #{location}"
+        digit = match_array[0]
+        puts "digit #{digit}"
+        input[location] = digit
+        puts input
+      end
     end
   end
 

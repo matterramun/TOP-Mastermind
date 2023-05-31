@@ -8,20 +8,10 @@ inform Codebreaker when each digit exists but does not match position
 inform Codebreaker when each digit exists and matches position
 
 ## Build steps
-1. Build the game assuming the computer randomly selects the secret colors and the human player must guess them. Remember that you need to give the proper feedback on how good the guess was each turn!
+1. Build the game assuming the computer randomly selects the secret code and the human player must guess them. Remember that you need to give the proper feedback on how good the guess was each turn!
 2. Now refactor your code to allow the human player to choose whether they want to be the creator of the secret code or the guesser.
-3. Build it out so that the computer will guess if you decide to choose your own secret colors. You may choose to implement a computer strategy that follows the rules of the game or you can modify these rules.
+3. Build it out so that the computer will guess if you decide to choose your own secret code. You may choose to implement a computer strategy that follows the rules of the game or you can modify these rules.
 
-Bugs:
-
-✅ 0001 - Guess with multiple matches generates extra entries in guess array. Each guess digit must only result in a single 
-
-✅ 0002 - ex code 2462: 2462|246?. Guess digit matching earlier in the string will generate a ? regardless of result in current spot.
-
-✅ 0003 - ex code 1399: 1123|1?xx. If only one matching digit, dont mismatch if the single match has already been matched.
-
-✅ 0004 - ex code 6954: 3964|?9x4. Guess result matches ? to location on the code, not on the guess. May need to flip the parentage of the loop again.
-
-✅ 0005 - ex code 3973: 3397|3x??. 2nd 3 should be ?. Ensure there is a true match with the same digit on a higher index, return x
-
-✅ 0006 - ex code 8254: 1122|xx??. Should only return 1 ?.
+## Current State
+User as guesser functionality is complete.
+PC as guesser functionality is incomplete. Currently provides 3 standard guesses and then attempts random numbers.

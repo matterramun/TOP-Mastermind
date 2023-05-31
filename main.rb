@@ -135,8 +135,8 @@ class Mastermind
   end
 
   def pc_guesser
-    # puts "match_array: #{@match_array}"
-    # puts "imperfect_array: #{@imperfect_array}"
+    puts "match_array: #{@match_array}"
+    puts "imperfect_array: #{@imperfect_array}"
     case @board.length
     when 0
       1122
@@ -144,14 +144,14 @@ class Mastermind
       3456
     when 2
       7890
-    when 4..13
+    when 5..13
       # placeholder until the guessing logic is implemented
       rand(1000..9999)
-    when 3
+    when 3..4
       guess_array = []
       puts pc_utils(3,guess_array)
+      puts pc_utils(4,guess_array)
       puts "Guess array... #{guess_array}"
-      # pc_utils(4)
       guess_array.join
     end
   end
@@ -166,7 +166,9 @@ class Mastermind
       @match_array << input
     when 2 # Mismatch submission
       @imperfect_array << input
-    when 3 # Perfect match push into guess array
+    when 3..12
+      rand(1000..9999)
+    when 13 # Perfect match push into guess array
       @match_array.each do |match_array|
         location = match_array[1]
         puts "location #{location}"
@@ -174,6 +176,11 @@ class Mastermind
         puts "digit #{digit}"
         input[location] = digit
         puts input
+      end
+    when 14
+      
+      @imperfect_array.each do |imperfect_array|
+
       end
     end
   end
